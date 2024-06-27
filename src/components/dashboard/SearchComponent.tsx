@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 import { Button } from "../ui/button";
 import { IconSearch } from "@tabler/icons-react";
@@ -13,7 +13,8 @@ export default function SearchComponent() {
     null
   );
 
-  const handleSearch = async () => {
+  const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (searchRef.current) {
       const query = searchRef.current.value;
       const searchResults = await search(query);
@@ -23,17 +24,21 @@ export default function SearchComponent() {
 
   return (
     <div className="flex flex-col items-center h-full py-5">
-      <div className="w-full mx-2 flex gap-2 items-center px-3 py-2 h-10">
+      <form
+        onSubmit={handleSearch}
+        className="w-full mx-2 flex gap-2 items-center px-3 py-2 h-10"
+      >
         <Input
           ref={searchRef}
           type="text"
           placeholder="What do you want to play?"
         />
-        <Button onClick={handleSearch} className="rounded-full h-10">
+        <Button type="submit" className="rounded-full h-10">
           <IconSearch />
         </Button>
-      </div>
-      <div className="mt-5 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      </form>
+
+      <div className="mt-5 grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
         {results?.tracks.items.map((song, index) => (
           <SearchCard
             key={song.id}
