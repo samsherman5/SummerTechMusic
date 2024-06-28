@@ -22,7 +22,6 @@ export default async function searchForItem(
 
     if (data.status === 200) {
       const body = (await data.json()) as SpotifyApi.TrackSearchResponse;
-      console.log(body);
       return body;
     } else {
       throw Error(
@@ -30,7 +29,7 @@ export default async function searchForItem(
       );
     }
   } catch (e) {
-    console.error("Fetch error: " + e);
+    console.error("Fetch error in searchForItem: " + e);
     return null;
   }
 }
