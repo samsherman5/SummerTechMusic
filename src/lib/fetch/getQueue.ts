@@ -10,6 +10,7 @@ export default async function getQueue(): Promise<SpotifyApi.UsersQueueResponse 
       method: "GET",
       headers: {
         Authorization: "Bearer " + authToken,
+        "Cache-Control": "no-cache", // Add this line to disable caching
       },
       next: {
         tags: ["playback"],
