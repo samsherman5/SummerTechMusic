@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { auth } from "@/auth";
+export const dynamic = "force-dynamic";
 import getQueue from "@/lib/fetch/getQueue";
-import isAdminSession from "@/lib/isAdminSession";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
